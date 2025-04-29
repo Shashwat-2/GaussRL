@@ -1,0 +1,9 @@
+numpy<=1.26
+scipy
+pandas
+matplotlib
+chaosmagpy
+torch
+tqdm
+xlrd>=2.0.1
+basemap
