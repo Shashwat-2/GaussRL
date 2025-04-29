@@ -5,6 +5,7 @@ import torch
 from chaosmagpy.model_utils import synth_values
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 class MDP:
 
@@ -62,7 +63,7 @@ class MDP:
 
         cont = torch.mean((s-s_)**2)
 
-
+        
         # alpha = 100
         # beta = 0
         # gamma = 0
@@ -87,8 +88,9 @@ class Trajectory(MDP):
             h = None
             for j in range(2020,year-5,-5):
                 state = self.current_state
-                action, hid = policy.sample(state, h)
-                action = action.detach()
+                action, hid = policy.sample(state.to(device), h.to(device) if h is not None else h)
+                action = action.detach().cpu()
+                hid = hid.detach().cpu()
                 s,r = self.step(j,action)
                 traj[i].append((state, action, r, s, self.coeff(j), h))
                 h = hid
