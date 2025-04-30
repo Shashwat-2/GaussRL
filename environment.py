@@ -31,6 +31,11 @@ class MDP:
         dB_phi_dphi = np.gradient(B_phi, axis=1) / dphi
         div = (1/(r*np.sin(theta))) * (dB_theta_sin_dtheta + dB_phi_dphi)
         return np.mean(np.abs(div))
+    
+    def dipole_fraction(self, coeff):
+        P1 = coeff[0]**2 + coeff[1]**2 + coeff[2]**2
+        Pt = sum(i**2 for i in coeff)
+        return P1/Pt
         
     def field(self, lat: np.ndarray | float, lon: np.ndarray | float, coeff = None) -> List[np.ndarray | float]:
         if coeff is None:
@@ -63,7 +68,7 @@ class MDP:
 
         cont = torch.mean((s-s_)**2)
 
-        
+
         # alpha = 100
         # beta = 0
         # gamma = 0
