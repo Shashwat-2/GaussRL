@@ -98,3 +98,10 @@ def obs_diff(trj, pred_coeff, N=10):
     fig.tight_layout()
     fig.savefig(f'Plots/{trj.year}/obs_diff_{trj.year}.png', dpi=600)
     plt.close()
+
+def div_plot(trj, true, pred):
+    divs = list()
+    for i in [true, pred]:
+        LON, LAT, (F, B_r, B_theta, B_phi) = trj.contour_plot(10,10,i)
+        div = trj.divergence(6371.2, 90-LAT, LON, B_r, B_theta, B_phi)
+        divs.append(div)

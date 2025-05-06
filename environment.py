@@ -68,6 +68,8 @@ class MDP:
 
         cont = torch.mean((s-s_)**2)
 
+        df = self.dipole_fraction(s_)
+
 
         # alpha = 100
         # beta = 0
@@ -77,7 +79,7 @@ class MDP:
         # R2 = 1e-4*np.mean(abs(self.contour_plot(100,150,coeff=s_)[2] - self.contour_plot(100,150)[2]))
         # R3 = abs(sum(abs(s_[120:])-60))
         # return -alpha * R1 - beta * R2 - gamma * R3
-        return 100/div + 10*cont
+        return 100/div + 10*cont + (9 - 10*df)
     
 
 class Trajectory(MDP):
