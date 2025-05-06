@@ -22,16 +22,18 @@ trj.reset()
 # epochs = 50
 
 # trainer.run(epochs, trj, actor, critic, actor_optimizer, critic_optimizer)
-# for year in tqdm(range(2020,1895,-5)):
-#     pred,true = evaluate.run(year)[3:5]
-#     pred = pred.squeeze(0)
+for year in tqdm(range(2020,1895,-5)):
+    pred,true = evaluate.run(year)[3:5]
+    pred = pred.squeeze(0)
 
-    # plt.plot(torch.log(abs(pred)), label='pred')
-    # plt.plot(torch.log(abs(true)), label='true')
-    # plt.title(f'Year {year}')
-    # plt.legend()
-    # plt.savefig(f'Plots/coeff_plot_{year}.png', dpi=600)
-    # plt.clf()
+    plt.plot(torch.log(abs(pred)), label='pred')
+    plt.plot(torch.log(abs(true)), label='true')
+    plt.xlabel('Coefficient id')
+    plt.ylabel('abs(Value)')
+    plt.title(f'Year {year}')
+    plt.legend()
+    plt.savefig(f'Plots/coeff_plot_{year}.png', dpi=600)
+    plt.clf()
 
     # plots.contour_plot(trj, pred, year)
 
@@ -43,10 +45,10 @@ trj.reset()
 #     print(div1>div2)
 
 # evaluate.run(1945)
-year = 1920
-pred,true = evaluate.run(year)[3:5]
-pred = pred.squeeze(0)
-true = trj.coeff(year)
+# year = 1920
+# pred,true = evaluate.run(year)[3:5]
+# pred = pred.squeeze(0)
+# true = trj.coeff(year)
 
-print(trj.dipole_fraction(pred))
-print(trj.dipole_fraction(true))
+# print(trj.dipole_fraction(pred))
+# print(trj.dipole_fraction(true))
