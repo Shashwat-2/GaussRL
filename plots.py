@@ -56,24 +56,24 @@ def contour_plot(trj, pred_coeff, lat_spaceing = 1000, lon_spacing = 1500):
     fig.savefig(f'Plots/{trj.year}/contour_plot_{trj.year}.png',dpi=1200)
     plt.close()
 
-def gauss_coeff_plot(trj, pred_coeff):
+def gauss_coeff_plot(trj, pred_coeff, year):
 
-    plt.plot(abs(trj.coeff), label='DGRF', c='b')
+    plt.plot(abs(trj.coeff(year)), label='DGRF', c='b')
     plt.plot(abs(pred_coeff), label='Predicted', c='r')
     plt.xlabel('Gauss coefficient ID', fontweight='bold')
     plt.ylabel('|Gauss coefficient value|', fontweight='bold')
     plt.legend()
     plt.title('Absolute Gauss Coefficients (original scale)', fontweight='bold')
-    plt.savefig(f'Plots/{trj.year}/orig_vs_pred(norm)_{trj.year}.png',dpi=600)
+    plt.savefig(f'Plots/orig_vs_pred(norm)_{year}.png',dpi=600)
     plt.close()
 
     plt.plot(np.log(abs(pred_coeff)), label='Predicted', c='r')
-    plt.plot(np.log(abs(trj.coeff)), label='DGRF', c='b', alpha=0.6)
+    plt.plot(np.log(abs(trj.coeff(year))), label='DGRF', c='b', alpha=0.6)
     plt.xlabel('Gauss coefficient ID', fontweight='bold')
     plt.ylabel('log(|Gauss coefficient value|)', fontweight='bold')
     plt.legend()
     plt.title('Gauss Coefficients (logarithmic scale)', fontweight='bold')
-    plt.savefig(f'Plots/{trj.year}/orig_vs_pred(log)_{trj.year}.png',dpi=600)
+    plt.savefig(f'Plots/orig_vs_pred(log)_{year}.png',dpi=600)
     plt.close()
 
 def obs_diff(trj, pred_coeff, N=10):
