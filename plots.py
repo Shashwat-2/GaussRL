@@ -32,7 +32,7 @@ def obs_data_loc(trj):
     plt.savefig(f'Plots/{trj.year}/obs_data_loc_{trj.year}.png',dpi=600)
     plt.close()
 
-def contour_plot(trj, pred_coeff, lat_spaceing = 1000, lon_spacing = 1500):
+def contour_plot(trj, pred_coeff, year, lat_spaceing = 1000, lon_spacing = 1500):
 
     fig, (ax1,ax2) = plt.subplots(2,1, figsize=(11,9), constrained_layout=True)
     m1 = Basemap(projection='merc',llcrnrlat=-65,urcrnrlat=65,\
@@ -50,10 +50,10 @@ def contour_plot(trj, pred_coeff, lat_spaceing = 1000, lon_spacing = 1500):
     x2,y2 = m2(x2,y2)
     _c1 = m1.contourf(x1,y1,z1)
     _c2 = m2.contourf(x2,y2,z2)
-    ax1.set_title(f'Original DGRF ({trj.year})', fontweight='bold')
-    ax2.set_title(f'Predicted GRF ({trj.year})', fontweight='bold')
+    ax1.set_title(f'Original DGRF ({year})', fontweight='bold')
+    ax2.set_title(f'Predicted GRF ({year})', fontweight='bold')
     fig.colorbar(_c2, ax=[ax1,ax2])
-    fig.savefig(f'Plots/{trj.year}/contour_plot_{trj.year}.png',dpi=1200)
+    fig.savefig(f'Contour_Plots/{year}/contour_plot_{year}.png',dpi=1200)
     plt.close()
 
 def gauss_coeff_plot(trj, pred_coeff, year):
